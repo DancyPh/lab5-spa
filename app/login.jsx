@@ -1,13 +1,37 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TextInput,Button } from 'react-native'
+import React, { useState } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
-import Input from '../components/Input'
+import { useAuth } from '../context/AuthContext'
+import { useNavigation } from '@react-navigation/native'
+
 const Login = () => {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigation = useNavigation();
+
+  const handleLogin = () => {
+    login(username, password, navigation);
+    
+  }
+
   return (
     <ScreenWrapper>
-        <View style={styles.container}>
-            <Input />
-        </View>
+        <View>
+          <TextInput
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <Button title="Đăng nhập" onPress={handleLogin} />
+      </View>
     </ScreenWrapper>
     
   )
