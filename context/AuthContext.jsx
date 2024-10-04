@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
     const login = async (username, password, navigation) => {
         // Kiểm tra user admin
         if (username === 'admin' && password === '12345') {
-            setUser({ username: 'admin', role: 'admin' });
+            setUser({name: 'Admin', username: 'admin', role: 'admin' });
             navigation.navigate('Admin');
         } else {
             try {
@@ -33,12 +33,14 @@ export const AuthProvider = ({children}) => {
                 // Lấy tài liệu đầu tiên từ kết quả
                 const userDoc = querySnapshot.docs[0];
                 const userData = userDoc.data();
+                const userId = userDoc.id
     
                 // Kiểm tra mật khẩu
                 if (userData && userData.password === password) {
-                    setUser({ username, role: 'customer' });
+                    setUser({id: userId ,name: userData.name, username, role: 'customer' });
                     navigation.navigate('Customer');
                     console.log(username, 'đã đăng nhập !');
+                    console.log(user)
                 } else {
                     Alert.alert('Sai mật khẩu !');
                 }
