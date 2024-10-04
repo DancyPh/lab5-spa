@@ -14,9 +14,10 @@ export const AuthProvider = ({children}) => {
     // Hàm đăng nhập với 3 đối số: username, password, navigation
     const login = async (username, password, navigation) => {
         // Kiểm tra user admin
-        if (username === 'admin' && password === '12345') {
+        if (username === 'admin' && password === '123456') {
             setUser({name: 'Admin', username: 'admin', role: 'admin' });
             navigation.navigate('Admin');
+            console.log(user)
         } else {
             try {
                 // Tạo truy vấn để tìm tài liệu với username
